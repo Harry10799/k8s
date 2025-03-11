@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp
+  namespace: default
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      containers:
+        - name: busybox
+          image: busybox
+          args:
+            - /bin/sh
+            - -c
+            - while true; do echo "$(date) - Log from myapp"; sleep 5; done
